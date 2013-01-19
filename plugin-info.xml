@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin id="Dragooon:WeNotif-Subs-Topics">
+  <name>Topic notification subscriptions</name>
+  <author email="mail@dragooon.net" url="http://smf-media.com/">Shitiz "Dragooon" Garg</author>
+  <description>Notification's subscription extensions for providing subscriptions to topics</description>
+  <version>1.0</version>
+
+  <hooks>
+    <function point="notification_callback" function="wenotif_subs_topics_hook_callback" filename="$plugindir/plugin.notifier" />
+    <function point="notification_subscription" function="wenotif_subs_topics_hook_subscription" filename="$plugindir/plugin" />
+    <function point="display_main" function="wenotif_subs_topics_hook_display_main" filename="$plugindir/plugin" />
+    <function point="create_post_after" function="wenotif_subs_topics_hook_post" filename="$plugindir/plugin" />
+  </hooks>
+</plugin>
