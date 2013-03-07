@@ -107,7 +107,7 @@ class TopicSubsNotifier implements Notifier
     {
         global $txt;
 
-        return array($txt['topicsubs_title'], $txt['topicsubs_desc'], array());
+        return array($txt['topicsubs_title_notif'], $txt['topicsubs_desc'], array());
     }
 
     /**

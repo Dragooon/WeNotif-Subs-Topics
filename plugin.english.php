@@ -12,5 +12,6 @@
  */
 
 $txt['topicsubs_title'] = 'Topics';
+$txt['topicsubs_title_notif'] = 'Topic Subscriptions';
 $txt['topicsubs_desc'] = 'Allows you to subscribe to new replies to a topic';
 $txt['topicsubs_text'] = 'A new reply was posted in "%s"';
