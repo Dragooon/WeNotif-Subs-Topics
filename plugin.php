@@ -136,12 +136,12 @@ class TopicSubsSubscriber implements NotifSubscriber
 
     /**
      * Returns text for profile areas which will be displayed to the user
-     * Returned array will be formatted like:
      *
      * @access public
+     * @param int $id_member
      * @return array
      */
-    public function getProfile()
+    public function getProfile($id_member)
     {
         global $txt;
 
