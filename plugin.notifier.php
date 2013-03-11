@@ -159,6 +159,6 @@ class TopicSubsNotifier extends Notifier
      */
     public function getEmail(Notification $notification, array $email_data)
     {
-        return array('nope', 'nada'); //@todo: Implement this freaking thing
+        return array($txt['topicsubs_email_subject'], $this->getText($notification));
     }
 }

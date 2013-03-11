@@ -19,3 +19,4 @@ $txt['topicsubs_text_multiple'] = '%s posted %d new replies in "%s"';
 $txt['topicsubs_text_multiple_subs'] = '%s and %d other(s) posted %d new replies in "%s"';
 $txt['topicsubs_auto'] = 'Automatically subscribe to new topics?';
 $txt['topicsubs_auto_desc'] = 'If enabled, you\'ll be automatically subscribed to any topics you create';
+$txt['topicsubs_email_subject'] = 'A new reply has been posted to a topic you are subscribed to!';
