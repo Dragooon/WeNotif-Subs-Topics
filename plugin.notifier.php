@@ -67,7 +67,13 @@ class TopicSubsNotifier extends Notifier
 
         $data = $notification->getData();
 
-        return sprintf($txt['topicsubs_text'], $data['subject']);
+        if ($data['post_count'] > 1)
+            if (count($data['members']) > 1)
+                return sprintf($txt['topicsubs_text_multiple_mems'], $data['member'], count($data['members']) - 1, $data['post_count'], $data['subject']);
+            else
+                return sprintf($txt['topicsubs_text_multiple'], $data['member'], $data['post_count'], $data['subject']);
+        else
+            return sprintf($txt['topicsubs_text'], $data['member'], $data['subject']);
     }
 
     /**
@@ -91,7 +97,14 @@ class TopicSubsNotifier extends Notifier
      */
     public function handleMultiple(Notification $notification, array &$data)
     {
-        return true; //@todo: Should handle multiples
+        $new_data = $notification->getData();
+        $data['post_count']++;
+        $data['members'][] = $new_data['members'][0];
+        $data['members'] = array_unique($data['members']);
+
+        $notification->updateData($data);
+
+        return false;
     }
 
     /**

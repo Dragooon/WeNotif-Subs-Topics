@@ -45,6 +45,9 @@ function wenotif_subs_topics_hook_post(&$msgOptions, &$topicOptions, &$posterOpt
     NotifSubscription::issue(WeNotif_Subs::getSubscribers('topicsubs'), $topicOptions['id'], WeNotif::getNotifiers('topicsubs'), array(
         'subject' => $subject,
         'msg' => $msgOptions['id'],
+        'member' => we::$user['name'],
+        'members' => array(we::$id),
+        'post_count' => 1,
     ));
 }
 
