@@ -25,7 +25,7 @@ function wenotif_subs_topics_hook_callback(&$notifiers)
 /**
  * Notifier interface for topic subscriber
  */
-class TopicSubsNotifier implements Notifier
+class TopicSubsNotifier extends Notifier
 {
     /**
      * Constructor, loads this plugin's language
@@ -128,10 +128,9 @@ class TopicSubsNotifier implements Notifier
      *
      * @access public
      * @param Notification $notification
-     * @param array $email_data Any additional e-mail data passed to Notification::issue function
      * @return array(subject, body)
      */
-    public function getEmail(Notification $notification, array $email_data)
+    public function getEmail(Notification $notification)
     {
         return array('nope', 'nada'); //@todo: Implement this freaking thing
     }
