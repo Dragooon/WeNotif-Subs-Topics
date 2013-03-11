@@ -33,6 +33,9 @@ function wenotif_subs_topics_hook_subscription(&$subscribers)
  */
 function wenotif_subs_topics_hook_post(&$msgOptions, &$topicOptions, &$posterOptions, &$new_topic)
 {
+    if ($new_topic && WeNotif::getNotifiers('topicsubs')->getPref('autotopic'))
+        NotifSubscription::store(WeNotif_Subs::getSubscribers('topicsubs'), $topicOptions['id']);
+
     if ($new_topic)
         return;
 

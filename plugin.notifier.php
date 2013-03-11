@@ -107,19 +107,31 @@ class TopicSubsNotifier extends Notifier
     {
         global $txt;
 
-        return array($txt['topicsubs_title_notif'], $txt['topicsubs_desc'], array());
+        return array(
+            $txt['topicsubs_title_notif'],
+            $txt['topicsubs_desc'],
+            array(
+                array(
+                    'check', 'topicsubs_autotopic',
+                    'value' => $this->getPref('autotopic', $id_member),
+                    'text_label' => $txt['topicsubs_auto'],
+                    'subtext' => $txt['topicsubs_auto_desc'],
+                ),
+            ),
+        );
     }
 
     /**
-     * Callback for profile area, called when saving the profile area
+     * Saves the profile preferences
      *
      * @access public
-     * @param int $id_member The ID of the member whose profile is currently being accessed
-     * @param array $settings A key => value pair of the fed settings
+     * @param int $id_member
+     * @param array $settings
      * @return void
      */
     public function saveProfile($id_member, array $settings)
     {
+        $this->savePref('autotopic', $settings['topicsubs_autotopic'], $id_member);
     }
 
     /**
