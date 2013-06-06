@@ -33,16 +33,16 @@ function wenotif_subs_topics_hook_subscription(&$subscribers)
  */
 function wenotif_subs_topics_hook_post(&$msgOptions, &$topicOptions, &$posterOptions, &$new_topic)
 {
-    if ($new_topic && WeNotif::getNotifiers('topicsubs')->getPref('autotopic'))
-        NotifSubscription::store(WeNotif_Subs::getSubscribers('topicsubs'), $topicOptions['id']);
+    if ($new_topic && weNotif::getNotifiers('topicsubs')->getPref('autotopic'))
+        NotifSubscription::store(weNotif::getSubscribers('topicsubs'), $topicOptions['id']);
 
     if ($new_topic)
         return;
 
-    $object = WeNotif_Subs::getSubscribers('topicsubs')->getObjects(array($topicOptions['id']));
+    $object = weNotif::getSubscribers('topicsubs')->getObjects(array($topicOptions['id']));
     $subject = $object[$topicOptions['id']]['title'];
 
-    NotifSubscription::issue(WeNotif_Subs::getSubscribers('topicsubs'), $topicOptions['id'], WeNotif::getNotifiers('topicsubs'), array(
+    NotifSubscription::issue(weNotif::getSubscribers('topicsubs'), $topicOptions['id'], weNotif::getNotifiers('topicsubs'), array(
         'subject' => $subject,
         'msg' => $msgOptions['id'],
         'member' => we::$user['name'],
@@ -61,16 +61,16 @@ function wenotif_subs_topics_hook_display_main()
 {
     global $context, $txt, $scripturl;
 
-    Notification::markReadForNotifier(we::$id, WeNotif::getNotifiers('topicsubs'), $context['current_topic']);
+    Notification::markReadForNotifier(we::$id, weNotif::getNotifiers('topicsubs'), $context['current_topic']);
 
-    $is_subscribed = (bool) NotifSubscription::get(WeNotif_Subs::getSubscribers('topicsubs'), $context['current_topic'], we::$id);
+    $is_subscribed = (bool) NotifSubscription::get(weNotif::getSubscribers('topicsubs'), $context['current_topic'], we::$id);
 
     unset($context['nav_buttons']['normal']['notify']); //!!!Temporary
 
     $context['nav_buttons']['normal'][ ($is_subscribed ? 'unnotify' : 'notify')] = array(
         'text' => $is_subscribed ? 'unnotify' : 'notify', 
         'custom' => 'onclick="return ask(' . JavaScriptEscape($txt['notification_' . ($is_subscribed ? 'disable_topic' : 'enable_topic')]) . ', e);"',
-        'url' => '<URL>?action=subscribe;' . ($is_subscribed ? 'unsubscribe;' : '') . 'object=' . $context['current_topic'] . ';type=topicsubs;' . $context['session_query'],
+        'url' => '<URL>?action=notification;sa=' . ($is_subscribed ? 'unsubscribe' : 'subscribe') . ';object=' . $context['current_topic'] . ';type=topicsubs;' . $context['session_query'],
     );
 }
 

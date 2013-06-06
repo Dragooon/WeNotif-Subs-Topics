@@ -66,6 +66,8 @@ class TopicSubsNotifier extends Notifier
         global $txt;
 
         $data = $notification->getData();
+        $data['member'] = '<a href="<URL>?action=profile;u=' . $data['members'][0] . '">' . $data['member'] . '</a>';
+        $data['subject'] = '<a href="<URL>?topic=' . $notification->getObject() . '.msg' . $data['msg'] . '#msg' . $data['msg'] . '"">' . $data['subject'] . '</a>';
 
         if ($data['post_count'] > 1)
             if (count($data['members']) > 1)
@@ -133,6 +135,19 @@ class TopicSubsNotifier extends Notifier
                 ),
             ),
         );
+    }
+
+    /**
+     * Returns the preview for this notification
+     *
+     * @access public
+     * @param Notification $notification
+     * @return string
+     */
+    public function getPreview(Notification $notification)
+    {
+        $data = $notification->getData();
+        return get_single_post($data['msg']);
     }
 
     /**
